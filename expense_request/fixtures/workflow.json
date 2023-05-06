@@ -86,16 +86,6 @@
     "parentfield": "transitions",
     "parenttype": "Workflow",
     "state": "Pending"
-   },{
-    "action": "Cancel",
-    "allow_self_approval": 1,
-    "allowed": "Expense Approver",
-    "condition": null,
-    "next_state": "Cancelled",
-    "parent": "Expense Approval",
-    "parentfield": "transitions",
-    "parenttype": "Workflow",
-    "state": "Approved"
    }
   ],
   "workflow_name": "Expense Approval",
