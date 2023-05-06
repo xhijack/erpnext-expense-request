@@ -46,5 +46,17 @@
   "parenttype": null,
   "style": "",
   "workflow_state_name": "Requested"
- }
+ },
+ {
+    "docstatus": 0,
+    "doctype": "Workflow State",
+    "icon": "",
+    "modified": "2020-10-21 22:21:33.442328",
+    "name": "Cancelled",
+    "parent": null,
+    "parentfield": null,
+    "parenttype": null,
+    "style": "",
+    "workflow_state_name": "Cancelled"
+   }
 ]
