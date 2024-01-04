@@ -13,9 +13,9 @@
   "account_to",
   "amount",
   "column_break_bjib",
+  "company",
   "posting_date",
   "edit_posting_date",
-  "company",
   "amended_from",
   "remarks"
  ],
@@ -56,7 +56,8 @@
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
-   "options": "Company"
+   "options": "Company",
+   "reqd": 1
   },
   {
    "fieldname": "account_from",
@@ -82,7 +83,7 @@
    "label": "Remarks"
   },
   {
-   "default": "Today",
+   "default": "Now",
    "fieldname": "posting_date",
    "fieldtype": "Datetime",
    "label": "Posting Date",
@@ -113,7 +114,7 @@
    "link_fieldname": "bill_no"
   }
  ],
- "modified": "2024-01-03 09:05:51.937006",
+ "modified": "2024-01-04 08:56:58.464347",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Fund Transfer",

@@ -11,7 +11,8 @@ frappe.ui.form.on("Fund Transfer", {
                         
                     ],
                     "root_type": "Asset",
-                    "is_group": "0"
+                    "is_group": "0",
+                    "company": frm.doc.company
                     
 				}
 			}
@@ -25,11 +26,15 @@ frappe.ui.form.on("Fund Transfer", {
                         
                     ],
                     "root_type": "Asset",
-                    "is_group": "0"
+                    "is_group": "0",
+                    "company": frm.doc.company
 				}
 			}
 
 		});
-
 	},
+    company: function(frm) {
+        frm.set_value("account_from", "");
+        frm.set_value("account_to", "");
+    }
 });

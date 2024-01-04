@@ -12,9 +12,9 @@
   "title",
   "receive_from",
   "column_break_ysvv",
+  "company",
   "mode_of_payment",
   "account_deposit_to",
-  "company",
   "column_break_awwt",
   "posting_date",
   "edit_posting_date",
@@ -67,7 +67,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Today",
+   "default": "Now",
    "fieldname": "posting_date",
    "fieldtype": "Datetime",
    "label": "Posting Date",
@@ -187,7 +187,7 @@
    "link_fieldname": "bill_no"
   }
  ],
- "modified": "2024-01-03 08:00:25.196573",
+ "modified": "2024-01-04 08:51:09.986367",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Income Entry",

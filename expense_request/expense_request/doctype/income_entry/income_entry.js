@@ -21,7 +21,8 @@ frappe.ui.form.on("Income Entry", {
 		frm.set_query("default_cost_center", () => {
 			return {
 				filters: [
-					["Cost Center", "is_group", "=", "0"]
+					["Cost Center", "is_group", "=", "0"],
+                    ["Cost Center", "company", "=", frm.doc.company]
 				]
 			}
 		});
@@ -29,6 +30,7 @@ frappe.ui.form.on("Income Entry", {
             return{
 				filters: {
 					"account_type": ["in", ["Bank", "Cash"]],
+                    "company": frm.doc.company,
 				}
 			}
 
@@ -39,6 +41,10 @@ frappe.ui.form.on("Income Entry", {
 			// let payment_account_field = frm.doc.payment_type == "Receive" ? "paid_to" : "paid_from";
 			frm.set_value('account_deposit_to', account);
 		})
+    },
+    company: function(frm) {
+        frm.set_value("mode_of_payment", "");
+        frm.set_value("account_deposit_to", "");
     }
     
 });
