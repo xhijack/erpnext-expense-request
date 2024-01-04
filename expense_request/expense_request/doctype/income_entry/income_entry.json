@@ -1,0 +1,215 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2024-01-02 22:29:38.374274",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_ecnl",
+  "naming_series",
+  "title",
+  "receive_from",
+  "column_break_ysvv",
+  "mode_of_payment",
+  "account_deposit_to",
+  "company",
+  "column_break_awwt",
+  "posting_date",
+  "edit_posting_date",
+  "required_by",
+  "amended_from",
+  "accounting_dimension_section",
+  "default_project",
+  "column_break_pxjb",
+  "default_cost_center",
+  "section_break_jwgb",
+  "incomes",
+  "section_break_ewbb",
+  "remarks",
+  "column_break_yvoj",
+  "qty",
+  "column_break_sehk",
+  "total"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_ecnl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Income Entry",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_ysvv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Datetime",
+   "label": "Posting Date",
+   "read_only_depends_on": "eval: doc.edit_posting_date == 0;",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "edit_posting_date",
+   "fieldtype": "Check",
+   "label": "Edit Posting Date"
+  },
+  {
+   "fieldname": "required_by",
+   "fieldtype": "Date",
+   "label": "Required By"
+  },
+  {
+   "fieldname": "receive_from",
+   "fieldtype": "Data",
+   "label": "Receive From"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "IE/.YYYY./.MM./.####"
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "Mode of Payment",
+   "options": "Mode of Payment",
+   "reqd": 1
+  },
+  {
+   "fetch_from": ".mode_of_payment",
+   "fieldname": "account_deposit_to",
+   "fieldtype": "Link",
+   "label": "Account Deposit To",
+   "options": "Account",
+   "reqd": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "accounting_dimension_section",
+   "fieldtype": "Section Break",
+   "label": "Accounting Dimension"
+  },
+  {
+   "fieldname": "column_break_pxjb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_awwt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "default_project",
+   "fieldtype": "Link",
+   "label": "Default Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "default_cost_center",
+   "fieldtype": "Link",
+   "label": "Default Cost Center",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "section_break_jwgb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "section_break_ewbb",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_yvoj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_sehk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "total",
+   "fieldtype": "Currency",
+   "label": "Total",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "qty",
+   "fieldtype": "Int",
+   "label": "Qty",
+   "read_only": 1
+  },
+  {
+   "fieldname": "incomes",
+   "fieldtype": "Table",
+   "label": "Income Accounts",
+   "options": "Income Entry Item"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "bill_no"
+  }
+ ],
+ "modified": "2024-01-03 08:00:25.196573",
+ "modified_by": "Administrator",
+ "module": "Expense Request",
+ "name": "Income Entry",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "title"
+}
