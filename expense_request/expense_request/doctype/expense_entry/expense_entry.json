@@ -2,20 +2,27 @@
  "actions": [],
  "allow_events_in_timeline": 1,
  "allow_import": 1,
- "autoname": "field:title",
+ "autoname": "naming_series:",
  "creation": "2020-10-20 19:17:16.499838",
  "doctype": "DocType",
  "document_type": "Document",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "naming_series",
   "title",
-  "company",
-  "column_break_1",
-  "posting_date",
-  "set_posting_time",
-  "required_by",
   "payment_to",
+  "column_break_1",
+  "mode_of_payment",
+  "account_paid_from",
+  "abbr",
+  "payment_reference",
+  "clearance_date",
+  "column_break_ykvn",
+  "company",
+  "posting_date",
+  "required_by",
+  "set_posting_time",
   "accounting_dimensions_section",
   "default_project",
   "accounting_col",
@@ -30,9 +37,6 @@
   "remarks",
   "approved_by",
   "column_break_8",
-  "mode_of_payment",
-  "payment_reference",
-  "clearance_date",
   "status",
   "amended_from"
  ],
@@ -166,6 +170,7 @@
    "print_hide": 1
   },
   {
+   "collapsible": 1,
    "fieldname": "accounting_dimensions_section",
    "fieldtype": "Section Break",
    "label": "Accounting Dimensions"
@@ -204,16 +209,49 @@
    "fieldname": "title",
    "fieldtype": "Data",
    "label": "Title",
+   "reqd": 1,
    "unique": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "IE/.{abbr}./.YYYY./.MM./.####"
+  },
+  {
+   "fieldname": "column_break_ykvn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "company.abbr",
+   "fieldname": "abbr",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Abbr"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "account_paid_from",
+   "fieldtype": "Link",
+   "in_preview": 1,
+   "label": "Account Paid From",
+   "options": "Account",
+   "remember_last_selected_value": 1,
+   "reqd": 1
   }
  ],
  "is_submittable": 1,
- "links": [],
- "modified": "2023-08-29 13:22:19.003015",
+ "links": [
+  {
+   "link_doctype": "Journal Entry",
+   "link_fieldname": "bill_no"
+  }
+ ],
+ "modified": "2024-01-05 21:05:22.072947",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Expense Entry",
- "naming_rule": "By fieldname",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -263,8 +301,10 @@
   }
  ],
  "quick_entry": 1,
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "title",
  "track_changes": 1
 }

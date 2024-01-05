@@ -90,6 +90,21 @@ frappe.ui.form.on('Expense Entry', {
 				]
 			}
 		});
-	}
+        frm.set_query("account_paid_from", () => {
+            return{
+				filters: {
+					"account_type": ["in", ["Bank", "Cash"]],
+                    "company": frm.doc.company,
+				}
+			}
+
+		});
+	},
+    mode_of_payment(frm){
+        erpnext.accounts.pos.get_payment_mode_account(frm, frm.doc.mode_of_payment, function(account){
+			// let payment_account_field = frm.doc.payment_type == "Receive" ? "paid_to" : "paid_from";
+			frm.set_value('account_paid_from', account);
+		})
+    },
 
 });

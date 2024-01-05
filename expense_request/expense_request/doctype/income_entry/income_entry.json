@@ -15,6 +15,7 @@
   "company",
   "mode_of_payment",
   "account_deposit_to",
+  "abbr",
   "column_break_awwt",
   "posting_date",
   "edit_posting_date",
@@ -94,7 +95,7 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Naming Series",
-   "options": "IE/.YYYY./.MM./.####"
+   "options": "IE/.{abbr}./.YYYY./.MM./.####"
   },
   {
    "fieldname": "mode_of_payment",
@@ -177,6 +178,13 @@
    "fieldtype": "Table",
    "label": "Income Accounts",
    "options": "Income Entry Item"
+  },
+  {
+   "fetch_from": "company.abbr",
+   "fieldname": "abbr",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Abbr"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -187,7 +195,7 @@
    "link_fieldname": "bill_no"
   }
  ],
- "modified": "2024-01-04 08:51:09.986367",
+ "modified": "2024-01-05 21:05:33.819830",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Income Entry",
@@ -208,6 +216,7 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],

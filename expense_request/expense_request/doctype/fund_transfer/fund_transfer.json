@@ -114,7 +114,7 @@
    "link_fieldname": "bill_no"
   }
  ],
- "modified": "2024-01-04 08:56:58.464347",
+ "modified": "2024-01-05 21:05:49.847147",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Fund Transfer",
@@ -135,6 +135,7 @@
    "write": 1
   }
  ],
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
