@@ -33,13 +33,13 @@ class FundTransfer(Document):
 		accounts = []
 
 		accounts.append({  
-			'debit_in_account_currency': float(self.amount),
+			'credit_in_account_currency': float(self.amount),
 			'user_remark': str(self.remarks),
 			'account': self.account_from
 		})
 
 		accounts.append({  
-			'credit_in_account_currency': float(self.amount),
+			'debit_in_account_currency': float(self.amount),
 			'user_remark': str(self.remarks),
 			'account': self.account_to
 		})
