@@ -147,8 +147,11 @@ def make_journal_entry(expense_entry):
             expense_entry.clearance_date = ""
             expense_entry.payment_reference = ""
 
+        if expense_entry.account_paid_from:
+            pay_account = expense_entry.account_paid_from
+        else:
+            pay_account = frappe.db.get_value('Mode of Payment Account', {'parent' : expense_entry.mode_of_payment, 'company' : expense_entry.company}, 'default_account')
 
-        pay_account = frappe.db.get_value('Mode of Payment Account', {'parent' : expense_entry.mode_of_payment, 'company' : expense_entry.company}, 'default_account')
         if not pay_account or pay_account == "":
             frappe.throw(
                 title="Error",

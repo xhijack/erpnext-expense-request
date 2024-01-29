@@ -46,8 +46,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Description",
-   "reqd": 1
+   "label": "Description"
   },
   {
    "fieldname": "column_break_tqla",
@@ -78,7 +77,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-01-03 07:45:30.957328",
+ "modified": "2024-01-05 21:23:45.339487",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Income Entry Item",

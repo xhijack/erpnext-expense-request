@@ -216,7 +216,7 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Naming Series",
-   "options": "IE/.{abbr}./.YYYY./.MM./.####"
+   "options": "EE/.{abbr}./.YYYY./.MM./.####"
   },
   {
    "fieldname": "column_break_ykvn",
@@ -247,7 +247,7 @@
    "link_fieldname": "bill_no"
   }
  ],
- "modified": "2024-01-05 21:05:22.072947",
+ "modified": "2024-01-29 13:40:04.710683",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Expense Entry",
