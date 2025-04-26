@@ -1,6 +1,7 @@
 import frappe
 from frappe import _
 from frappe import utils
+from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import get_accounting_dimensions
 
 """
 TODO
@@ -85,12 +86,19 @@ def setup(expense_entry, method):
         if not detail.cost_center and expense_entry.default_cost_center:
             detail.cost_center = expense_entry.default_cost_center
 
+        dimensions = get_accounting_dimensions()
+        for dimension in dimensions:
+            if hasattr(detail, dimension):
+                setattr(detail, dimension, getattr(detail, dimension))
+
         expense_items.append(detail)
 
     expense_entry.expenses = expense_items
 
     expense_entry.total = total
     expense_entry.quantity = count
+
+    
 
     make_journal_entry(expense_entry)
 
@@ -123,15 +131,23 @@ def make_journal_entry(expense_entry):
 
         accounts = []
 
-        for detail in expense_entry.expenses:            
+        dimensions = get_accounting_dimensions()  # Ambil sekali saja!
 
-            accounts.append({  
+        for detail in expense_entry.expenses:
+            account_data = {  
                 'debit_in_account_currency': float(detail.amount),
                 'user_remark': str(detail.description),
                 'account': detail.expense_account,
                 'project': detail.project,
                 'cost_center': detail.cost_center
-            })
+            }
+
+            # Tambahkan dimension field satu-satu
+            for dimension in dimensions:
+                if hasattr(detail, dimension):
+                    account_data[dimension] = getattr(detail, dimension)
+
+            accounts.append(account_data)
 
         # finally add the payment account detail
 
@@ -155,12 +171,24 @@ def make_journal_entry(expense_entry):
                 msg="The selected Mode of Payment has no linked account."
             )
 
-        accounts.append({  
+        # buat payment account data dulu
+        account_temp = {
             'credit_in_account_currency': float(expense_entry.total),
             'user_remark': str(detail.description),
             'account': pay_account,
             'cost_center': expense_entry.default_cost_center
-        })
+        }
+
+        # tambahkan dimension fields ke account_temp
+        for dimension in dimensions:
+            if hasattr(expense_entry, dimension):
+                value = getattr(expense_entry, dimension)
+                if value:
+                    account_temp[dimension] = value
+
+        # setelah lengkap, baru append ke accounts
+        accounts.append(account_temp)
+
 
         # create the journal entry
         je = frappe.get_doc({
@@ -187,3 +215,46 @@ def make_journal_entry(expense_entry):
 
         je.insert()
         je.submit()
+
+def create_accounting_dimension(doc, method):
+    # import pdb
+    # pdb.set_trace()
+    if method == "on_update":
+        cf = frappe.db.exists("Custom Field", {"dt": "Expense Entry Item", "fieldname": doc.get("fieldname")})
+        if not cf:
+            custom_field = frappe.new_doc("Custom Field")
+            custom_field.dt = "Expense Entry Item"
+            custom_field.fieldname = doc.get("fieldname")
+            custom_field.label = doc.get("label")
+            custom_field.fieldtype = "Link"
+            custom_field.options = doc.get("name")
+            custom_field.insert_after = "cost_center"
+            custom_field.allow_on_submit = 1
+            custom_field.insert()
+        
+        cf = frappe.db.exists("Custom Field", {"dt": "Expense Entry", "fieldname": doc.get("fieldname")})
+        if not cf:
+            custom_field = frappe.new_doc("Custom Field")
+            custom_field.dt = "Expense Entry"
+            custom_field.fieldname = doc.get("fieldname")
+            custom_field.label = doc.get("label")
+            custom_field.fieldtype = "Link"
+            custom_field.options = doc.get("name")
+            custom_field.insert_after = "mode_of_payment"
+            custom_field.allow_on_submit = 1
+            custom_field.insert()
+
+        frappe.clear_cache(doctype="Expense Entry")
+
+def delete_accounting_dimension(doc, method):
+    if method == "on_trash":
+        cf = frappe.db.exists("Custom Field", {"dt": "Expense Entry Item", "fieldname": doc.get("fieldname")})
+        if cf:
+            frappe.delete_doc("Custom Field", cf)
+        
+        cf = frappe.db.exists("Custom Field", {"dt": "Expense Entry", "fieldname": doc.get("fieldname")})
+        if cf:
+            frappe.delete_doc("Custom Field", cf)
+
+        frappe.clear_cache(doctype="Expense Entry")
+        frappe.clear_cache(doctype="Expense Entry Item")
