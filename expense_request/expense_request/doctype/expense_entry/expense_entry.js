@@ -44,22 +44,22 @@ frappe.ui.form.on('Expense Entry Item', {
 frappe.ui.form.on('Expense Entry', {
     before_save: function(frm) { 
 
-        // $.each(frm.doc.expenses, function(i, d) { 
-        //     let label = "";
+        $.each(frm.doc.expenses, function(i, d) { 
+            let label = "";
             
-        //     if((d.cost_center === "" || typeof d.cost_center == 'undefined')) { 
+            if((d.cost_center === "" || typeof d.cost_center == 'undefined')) { 
                 
-        //         if (cur_frm.doc.default_cost_center === "" || typeof cur_frm.doc.default_cost_center == 'undefined') {
-        //             frappe.validated = false;
-        //             frappe.msgprint("Set a Default Cost Center or specify the Cost Center for expense <strong>number " 
-        //                             + (i + 1) + "</strong>.");
-        //             return false;
-        //         }
-        //         else {
-        //             d.cost_center = cur_frm.doc.default_cost_center; 
-        //         }
-        //     }
-        // }); 
+                if (cur_frm.doc.default_cost_center === "" || typeof cur_frm.doc.default_cost_center == 'undefined') {
+                    frappe.validated = false;
+                    frappe.msgprint("Set a Default Cost Center or specify the Cost Center for expense <strong>number " 
+                                    + (i + 1) + "</strong>.");
+                    return false;
+                }
+                else {
+                    d.cost_center = cur_frm.doc.default_cost_center; 
+                }
+            }
+        }); 
         
     },
     refresh(frm) {

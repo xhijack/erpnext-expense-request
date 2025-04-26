@@ -14,5 +14,5 @@ class ExpenseEntry(Document):
 			journal_entry_doc = frappe.get_doc("Journal Entry", journal_entry)
 			if journal_entry_doc.docstatus == 1:
 				journal_entry_doc.cancel()
-		self.status = "cancelled"
+		self.status = "Cancelled"
 		frappe.db.commit()

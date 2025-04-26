@@ -2,7 +2,7 @@
  "actions": [],
  "allow_events_in_timeline": 1,
  "allow_import": 1,
- "autoname": "naming_series:",
+ "autoname": "EXP-.YYYY.-.#####",
  "creation": "2020-10-20 19:17:16.499838",
  "doctype": "DocType",
  "document_type": "Document",
@@ -145,7 +145,7 @@
    "fieldtype": "Select",
    "hidden": 1,
    "label": "Status",
-   "options": "Pending\nApproved\nRejected"
+   "options": "Pending\nApproved\nRejected\nCancelled"
   },
   {
    "allow_on_submit": 1,
@@ -170,7 +170,6 @@
    "print_hide": 1
   },
   {
-   "collapsible": 1,
    "fieldname": "accounting_dimensions_section",
    "fieldtype": "Section Break",
    "label": "Accounting Dimensions"
@@ -247,7 +246,7 @@
    "link_fieldname": "bill_no"
   }
  ],
- "modified": "2024-01-29 13:40:04.710683",
+ "modified": "2025-04-26 17:31:09.329555",
  "modified_by": "Administrator",
  "module": "Expense Request",
  "name": "Expense Entry",
@@ -278,6 +277,8 @@
   },
   {
    "cancel": 1,
+   "create": 1,
+   "delete": 1,
    "email": 1,
    "export": 1,
    "print": 1,

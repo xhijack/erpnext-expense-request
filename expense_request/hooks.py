@@ -82,6 +82,10 @@ app_license = "MIT"
 doc_events = {
 	"Expense Entry": {
 		"on_update": "expense_request.api.setup"
+	},
+    "Accounting Dimension": {
+        "on_update": "expense_request.api.create_accounting_dimension",
+        "on_trash": "expense_request.api.delete_accounting_dimension",
 	}
 }
 

@@ -7,8 +7,8 @@ from frappe.model.document import Document
 
 class FundTransfer(Document):
 	def validate(self):
-		if self.account_from == self.account_to:
-			frappe.throw("Account From and Account To cannot be the same")
+		# if self.account_from == self.account_to:
+		# 	frappe.throw("Account From and Account To cannot be the same")
 		
 		if self.amount <= 0:
 			frappe.throw("Amount must be greater than zero")
