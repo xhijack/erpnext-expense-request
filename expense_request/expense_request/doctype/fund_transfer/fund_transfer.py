@@ -3,6 +3,7 @@
 
 import frappe
 from frappe.model.document import Document
+from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import get_accounting_dimensions
 
 
 class FundTransfer(Document):
@@ -21,6 +22,8 @@ class FundTransfer(Document):
 		je.cancel()
 
 	def make_journal(self):
+		dimensions = get_accounting_dimensions()
+		
 		# check for duplicates
 		
 		if frappe.db.exists({'doctype': 'Journal Entry', 'bill_no': self.name}):
@@ -32,17 +35,35 @@ class FundTransfer(Document):
 
 		accounts = []
 
-		accounts.append({  
+		account_credit_temp = {  
 			'credit_in_account_currency': float(self.amount),
 			'user_remark': str(self.remarks),
 			'account': self.account_from
-		})
+		}
 
-		accounts.append({  
+		for dimension in dimensions:
+			if hasattr(self, dimension + "_from"):
+				value = getattr(self, dimension + "_from")
+				if value:
+					account_credit_temp[dimension] = value
+
+
+		accounts.append(account_credit_temp)
+
+		account_debit_temp = {  
 			'debit_in_account_currency': float(self.amount),
 			'user_remark': str(self.remarks),
 			'account': self.account_to
-		})
+		}
+
+		for dimension in dimensions:
+			if hasattr(self, dimension + "_to"):
+				value = getattr(self, dimension + "_to")
+				if value:
+					account_debit_temp[dimension] = value
+
+
+		accounts.append(account_debit_temp)
 
 		je = frappe.new_doc('Journal Entry')
 		je.update({
