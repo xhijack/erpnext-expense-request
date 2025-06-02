@@ -111,9 +111,7 @@ def initialise_journal_entry(expense_entry_name):
         frappe.get_doc('Expense Entry', expense_entry_name)
     )
 
-
 def make_journal_entry(expense_entry):
-
     if expense_entry.status == "Approved":         
 
         # check for duplicates
@@ -166,8 +164,6 @@ def make_journal_entry(expense_entry):
         else:
             pay_account = frappe.db.get_value('Mode of Payment Account', {'parent' : expense_entry.mode_of_payment, 'company' : expense_entry.company}, 'default_account')
 
-
-        pay_account = frappe.db.get_value('Mode of Payment Account', {'parent' : expense_entry.mode_of_payment, 'company' : expense_entry.company}, 'default_account')
         if not pay_account or pay_account == "":
             frappe.throw(
                 title="Error",
@@ -192,7 +188,8 @@ def make_journal_entry(expense_entry):
         # setelah lengkap, baru append ke accounts
         accounts.append(account_temp)
 
-
+        import pdb
+        pdb.set_trace()
         # create the journal entry
         je = frappe.get_doc({
             'title': expense_entry.name,
@@ -270,8 +267,6 @@ def create_accounting_dimension_for_expense_entry(doc, method):
         frappe.clear_cache(doctype="Expense Entry")
 
 def create_accounting_dimension_for_fund_transfer(doc, method):
-    # import pdb
-    # pdb.set_trace()
     if method == "on_update":
         cf = frappe.db.exists("Custom Field", {"dt": "Fund Transfer", "fieldname": doc.get("fieldname") + "_from"})
         if not cf:
