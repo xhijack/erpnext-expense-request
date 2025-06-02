@@ -188,8 +188,6 @@ def make_journal_entry(expense_entry):
         # setelah lengkap, baru append ke accounts
         accounts.append(account_temp)
 
-        import pdb
-        pdb.set_trace()
         # create the journal entry
         je = frappe.get_doc({
             'title': expense_entry.name,
